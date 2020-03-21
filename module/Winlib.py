@@ -3,7 +3,7 @@ from ctypes import *
 
 class Winlib():
 
-    title = "Resemara"
+    title = "android-auto-play-opencv"
     
     def MessageBox(self, _message):
         user32 = windll.user32
