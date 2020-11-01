@@ -68,6 +68,10 @@ class AapoManager:
         self.adbl.longTouch(_x, _y, _msec)
         print('ロングタッチ: x=' + str(_x) + ', y=' + str(_y))
 
+    def swipeTouchPos(self, _x1, _y1, _x2, _y2, _msec):
+        self.adbl.swipeTouch(_x1, _y1, _x2, _y2, _msec)
+        print('スワイプ: x1=' + str(_x1) + ', y1=' + str(_y1) + ', x2=' + str(_x2) + ', y2=' + str(_y2))
+
     def inputtext(self, _message):
         self.adbl.inputtext(_message)
 

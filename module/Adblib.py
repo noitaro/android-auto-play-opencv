@@ -33,6 +33,9 @@ class Adblib:
     def longTouch(self, _x, _y, _msec):
         subprocess.call([self.adbpath + 'adb', '-s', self.device, 'shell', 'input', 'touchscreen', 'swipe', str(_x), str(_y), str(_x), str(_y), str(_msec)])
 
+    def swipeTouch(self, _x1, _y1, _x2, _y2, _msec):
+        subprocess.call([self.adbpath + 'adb', '-s', self.device, 'shell', 'input', 'touchscreen', 'swipe', str(_x1), str(_y1), str(_x2), str(_y2), str(_msec)])
+
     def screencap(self):
         # 画面キャプチャ
         self.screenImg = subprocess.check_output([self.adbpath + 'adb', '-s', self.device, 'exec-out', 'screencap', '-p'])
