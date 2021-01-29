@@ -1,3 +1,5 @@
+# This Python file uses the following encoding: utf-8
+
 from module import AapoManager as am
 
 adbpath = 'D:\\Program Files\\Nox\\bin\\'

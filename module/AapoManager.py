@@ -2,6 +2,7 @@ from module import Adblib as adb
 from module import MatchTemplateLib as mt
 from module import Winlib as win
 from time import sleep
+import os
 
 class AapoManager:
 
@@ -77,5 +78,21 @@ class AapoManager:
 
     def inputkeyevent(self, _keyevent):
         self.adbl.inputkeyevent(_keyevent)
+
+    def imgSave(self, fileName):
+        print(' キャプチャ画像保存')
+
+        # 保存先のフォルダを取得
+        dirname = os.path.dirname(fileName)
+
+        # フォルダが指定してあれば、作成
+        if len(dirname) != 0: os.makedirs(dirname, exist_ok=True)
+        
+        # キャプチャ画像保存
+        with open(fileName, mode='wb') as f:
+            f.write(self.adbl.screenImg)
+
+
+        
 
             
