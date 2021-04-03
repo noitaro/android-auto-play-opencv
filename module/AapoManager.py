@@ -25,7 +25,7 @@ class AapoManager:
 
     def end(self, _package):
         self.adbl.end(_package)
-        win.Winlib().MessageBox("アプリを終了しました。")
+        # win.Winlib().MessageBox("アプリを終了しました。")
 
     def sleep(self, _secs):
         sleep(_secs)
@@ -42,6 +42,7 @@ class AapoManager:
         # 類似度閾値超え判定
         result = self.mtl.judgeMatching()
         if result:
+            print('画像発見, img=' + _temp)
             return True
         else:
             return False
