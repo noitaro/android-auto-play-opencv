@@ -27,6 +27,10 @@ class MatchTemplateLib():
         self.minVal, self.maxVal, self.minLoc, self.maxLoc = cv2.minMaxLoc(match_result)
 
     def matchTemplate2(self, _img, _temp):
+
+        if len(_img) == 0 :
+            raise Exception('スクリーンショットが撮れていません。screencap を実行してから処理を開始して下さい。')
+
         self.img = cv2.imdecode(numpy.frombuffer(_img, numpy.uint8), 0)
         self.temp = cv2.imread(_temp, 0)
         # テンプレートマッチング

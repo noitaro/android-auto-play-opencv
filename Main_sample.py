@@ -2,7 +2,7 @@
 
 from module import AapoManager as am
 
-adbpath = 'D:\\Program Files\\Nox\\bin\\'
+adbpath = 'C:\\Program Files\\Nox\\bin\\'
 
 def main():
 
