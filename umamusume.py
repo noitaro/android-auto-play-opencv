@@ -236,6 +236,8 @@ def main():
                 aapo.sleep(3)
                 mode = 0 # モード0(リセット)
                 stackCount = 0
+        else:
+            stackCount = 0
 
 if __name__ == '__main__':
     main()
