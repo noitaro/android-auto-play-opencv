@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+# 解像度 960x540 で作ってあるので、実行前にNoxの解像度を変更して下さい。
 
 from module import AapoManager as am
 import datetime
