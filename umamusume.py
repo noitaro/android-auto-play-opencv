@@ -218,7 +218,7 @@ def main():
                 aapo.sleep(1)
 
         # スタック対策
-        elif aapo.chkImg('./umamusume/stack.png'):
+        if aapo.chkImg('./umamusume/stack.png'):
             aapo.sleep(1)
             stackCount = stackCount + 1
             if stackCount > 10:
