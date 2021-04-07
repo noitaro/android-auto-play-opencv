@@ -6,14 +6,19 @@ import datetime
 
 # adbpath = 'C:\\Program Files\\Nox\\bin\\'
 adbpath = 'D:\\Program Files\\Nox64\\bin\\'
+aapo = None
 
 def main():
 
+    global aapo
     aapo = am.AapoManager(adbpath)
     mode = 0 # モード0(リセット)
     folderName = ''
     stackCount = 0
 
+    # スタート
+    start()
+    
     while True:
         # 画面キャプチャ
         aapo.screencap()
@@ -95,6 +100,9 @@ def main():
 
         # プレゼントを受け取っている場合
         elif aapo.chkImg('./umamusume/present2.png'):
+            # フォルダ名がカラの場合セット
+            if len(folderName) == 0:
+                folderName = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
             # 実績ログが終わるまで10秒ほど待機（メニューボタンが隠れて押せないから）
             aapo.sleep(13)
             # メニューボタンの位置をタップ
@@ -146,7 +154,10 @@ def main():
             aapo.sleep(3)
             # ガチャボタンの位置をタップ
             aapo.touchPos(480, 930)
-            aapo.sleep(1)
+            aapo.sleep(2)
+            # サポートカードの位置をタップ
+            # aapo.touchPos(460, 580)
+            # aapo.sleep(1)
         
         # 10回引く！
         elif aapo.touchImg('./umamusume/10-kaihiku.png'):
@@ -160,6 +171,9 @@ def main():
             
         # ガチャ結果
         elif aapo.chkImg('./umamusume/gatya-kekka.png'):
+            # フォルダ名がカラの場合セット
+            if len(folderName) == 0:
+                folderName = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
             # スクショを保存
             aapo.imgSave('gatya/' + folderName + '/screenshot_' + datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.png')
             aapo.sleep(1)
@@ -169,19 +183,13 @@ def main():
 
         # 購入するボタンが出たら、ガチャ終了
         elif aapo.chkImg('./umamusume/konyusuru.png'):
-            # ホームキーを押す
-            aapo.inputkeyevent(3)
-            aapo.sleep(1)
-            # タスクキーを押す
-            aapo.inputkeyevent(187)
-            aapo.sleep(1)
-            # すべて消去の位置をタップ
-            aapo.touchPos(700, 55)
-            aapo.sleep(1)
-            # アプリ起動
-            aapo.start('jp.co.cygames.umamusume/jp.co.cygames.umamusume_activity.UmamusumeActivity')
-            aapo.sleep(10)
+            # リセット
+            reset()
+            # スタート
+            start()
+
             mode = 0 # モード0(リセット)
+            folderName = ''
 
         # モードが0(リセット)の場合
         elif mode == 0:
@@ -201,8 +209,6 @@ def main():
                 # 閉じるの位置をタップ
                 aapo.touchPos(270, 630)
                 aapo.sleep(1)
-                # フォルダ名をセット
-                folderName = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
                 # モードを1(チュートリアル)に変更
                 mode = 1 
 
@@ -223,22 +229,34 @@ def main():
             aapo.sleep(1)
             stackCount = stackCount + 1
             if stackCount > 10:
-                # ホームキーを押す
-                aapo.inputkeyevent(3)
-                aapo.sleep(1)
-                # タスクキーを押す
-                aapo.inputkeyevent(187)
-                aapo.sleep(1)
-                # すべて消去の位置をタップ
-                aapo.touchPos(700, 55)
-                aapo.sleep(1)
-                # アプリ起動
-                aapo.start('jp.co.cygames.umamusume/jp.co.cygames.umamusume_activity.UmamusumeActivity')
-                aapo.sleep(3)
+                # リセット
+                reset()
+                # スタート
+                start()
+                
                 mode = 0 # モード0(リセット)
+                folderName = ''
                 stackCount = 0
         else:
             stackCount = 0
+
+def start():
+    # アプリ起動
+    aapo.start('jp.co.cygames.umamusume/jp.co.cygames.umamusume_activity.UmamusumeActivity')
+    aapo.sleep(10)
+    return
+
+def reset():
+    # ホームキーを押す
+    aapo.inputkeyevent(3)
+    aapo.sleep(1)
+    # タスクキーを押す
+    aapo.inputkeyevent(187)
+    aapo.sleep(1)
+    # すべて消去の位置をタップ
+    aapo.touchPos(700, 55)
+    aapo.sleep(1)
+    return
 
 if __name__ == '__main__':
     main()
