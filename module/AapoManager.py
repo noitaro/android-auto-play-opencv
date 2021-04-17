@@ -47,6 +47,20 @@ class AapoManager:
         else:
             return False
 
+    def chkImg2(self, _temp):
+        # 曖昧画像検索
+        self.mtl.matchTemplate2(self.adbl.screenImg , _temp)
+        
+        # 類似度閾値超え判定
+        result = self.mtl.judgeMatching()
+        if result:
+            # 中央位置取得
+            cPos = self.mtl.getCenterPos()
+            print('画像発見, img=' + _temp + ', x=' + str(cPos[0]) + ', y=' + str(cPos[1]))
+            return (True, cPos[0], cPos[1])
+        else:
+            return (False, 0, 0)
+
     def touchImg(self, _temp):
         result = self.chkImg(_temp)
         if result == False:
