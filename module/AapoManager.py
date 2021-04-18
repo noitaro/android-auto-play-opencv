@@ -1,6 +1,5 @@
 from module import Adblib as adb
 from module import MatchTemplateLib as mt
-from module import Winlib as win
 from time import sleep
 import os
 
@@ -13,8 +12,8 @@ class AapoManager:
     # コンストラクタ
     def __init__(self, _adbpath):
         self.adbl = adb.Adblib(_adbpath)
-        if self.adbl.device == '':
-            win.Winlib().MessageBox("アンドロイド端末が接続されていません。")
+        if self.adbl.device == '' or self.adbl.device == '*':
+            print('アンドロイド端末が接続されていません。')
             exit()
         
         # インスタンス生成
@@ -25,14 +24,14 @@ class AapoManager:
 
     def end(self, _package):
         self.adbl.end(_package)
-        # win.Winlib().MessageBox("アプリを終了しました。")
+        print('アプリを終了しました。')
 
     def sleep(self, _secs):
         sleep(_secs)
 
     def screencap(self):
         # 画面キャプチャ
-        print(' 画面キャプチャ')
+        print('画面キャプチャ')
         self.adbl.screencap()
 
     def chkImg(self, _temp):
