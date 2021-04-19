@@ -1,5 +1,5 @@
 # android-auto-play-opencv
-OpenCV の画像認識を使って、Android を自動操作するモジュールです。
+OpenCV の画像認識を使って、Android を自動操作するライブラリです。
 
 Android を操作する時に [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb "Android Debug Bridge (adb)  |  Android Developers") を使うので、マウスカーソルが奪われません。
 
@@ -9,6 +9,7 @@ NoxPlayer を操作することも出来ます。
 https://noitalog.tokyo/android-auto-play-opencv/
 
 ## Installation
+このライブラリを使うには、[Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb "Android Debug Bridge (adb)  |  Android Developers") が必要です。
 ```
 pip install android-auto-play-opencv
 ```
