@@ -8,10 +8,15 @@ NoxPlayer を操作することも出来ます。
 ## Readme
 https://noitalog.tokyo/android-auto-play-opencv/
 
+## Installation
+```
+pip install android-auto-play-opencv
+```
+
 ## How to use
 ```python
 # This Python file uses the following encoding: utf-8
-from module import AapoManager as am
+import android_auto_play_opencv as am
 
 adbpath = '..\\platform-tools\\'
 
