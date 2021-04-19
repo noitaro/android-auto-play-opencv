@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 
-from module import AapoManager as am
+# pip install android-auto-play-opencv
+import android_auto_play_opencv as am
 import datetime # 日時を取得するために必要
 
 adbpath = 'C:\\Program Files\\Nox\\bin\\'

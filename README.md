@@ -18,6 +18,8 @@ OpenCV も同時にインストールされます。
 ## How to use
 ```python
 # This Python file uses the following encoding: utf-8
+
+# pip install android-auto-play-opencv
 import android_auto_play_opencv as am
 
 adbpath = '..\\platform-tools\\'
