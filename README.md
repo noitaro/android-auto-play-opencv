@@ -12,6 +12,7 @@ https://noitalog.tokyo/android-auto-play-opencv/
 ```
 pip install android-auto-play-opencv
 ```
+OpenCV も同時にインストールされます。
 
 ## How to use
 ```python
