@@ -10,14 +10,10 @@ class Adblib:
     def __init__(self, _adbpath):
         self.adbpath = _adbpath
 
-        # 末尾にエンマークがない場合、追加
-        if self.adbpath[-1:] != '\\':
-            self.adbpath = self.adbpath + '\\'
-
         try:
             results = subprocess.check_output([self.adbpath + 'adb', 'devices'])
         except FileNotFoundError:
-            print('adb.exe が見つかりません。（adbpath = ' + self.adbpath + '）')
+            print('adb.exe が見つかりません。（' + self.adbpath + 'adb.exe' + '）')
             exit()
 
         # バイト列を文字列に変換

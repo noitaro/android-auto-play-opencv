@@ -12,7 +12,7 @@ setup(
     name='android_auto_play_opencv',  # パッケージ名(プロジェクト名)
     packages=['android_auto_play_opencv'],  # パッケージ内(プロジェクト内)のパッケージ名をリスト形式で指定
 
-    version='1.0.2',  # バージョン
+    version='1.0.3',  # バージョン
 
     license='MIT',  # ライセンス
 
