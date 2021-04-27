@@ -2,3 +2,6 @@
 env1
 gatya
 __pycache__
+android_auto_play_opencv.egg-info
+build
+dist

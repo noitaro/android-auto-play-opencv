@@ -5,14 +5,14 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # long_description(後述)に、GitHub用のREADME.mdを指定
-with open(path.join(here, 'README.md'), encoding='utf-8_sig') as f:
+with open(path.join(here, '../README.md'), encoding='utf-8_sig') as f:
     long_description = f.read()
 
 setup(
     name='android_auto_play_opencv',  # パッケージ名(プロジェクト名)
     packages=['android_auto_play_opencv'],  # パッケージ内(プロジェクト内)のパッケージ名をリスト形式で指定
 
-    version='1.0.1',  # バージョン
+    version='1.0.2',  # バージョン
 
     license='MIT',  # ライセンス
 
@@ -36,3 +36,9 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],  # パッケージ(プロジェクト)の分類。https://pypi.org/classifiers/に掲載されているものを指定可能。
 )
+
+# python -m venv env1
+# pip install wheel twine 
+# python setup.py bdist_wheel
+# twine upload --repository pypi dist/*
+# https://pypi.org/project/android-auto-play-opencv/
