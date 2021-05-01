@@ -47,6 +47,9 @@ if __name__ == '__main__':
     main()
 ```
 
+### 完成品
+1. [ウマ娘自動リセマラ周回](https://github.com/noitaro/python-umamusume)
+
 ## Reference
 
 ### start
