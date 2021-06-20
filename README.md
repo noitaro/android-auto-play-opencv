@@ -151,3 +151,20 @@ aapo.imgSave('screenshot.png')
 aapo.imgSave('img/screenshot_' + datetime.datetime.now().strftime('%Y%m%d%H%M%S') + '.png')
 # ↑をする場合「import datetime」をファイルの先頭に書くこと。
 ```
+
+### デバイス選択
+複数の端末で同時実行できます。
+```python
+import inquirer  # pip install inquirer
+aapo = am.AapoManager('C:\\Program Files\\Nox\\bin\\')
+devicesselect = [
+    inquirer.List(
+        "device",
+        message="デバイスを選択して下さい。",
+        choices=aapo.adbl.devices
+    )
+]
+selected = inquirer.prompt(devicesselect)
+aapo.adbl.setdevice(selected['device'])
+aapo.screencap()
+```
