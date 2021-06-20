@@ -5,6 +5,7 @@ class Adblib:
     adbpath = ''
     device = ''
     screenImg = []
+    devices = []
 
     # コンストラクタ
     def __init__(self, _adbpath):
@@ -19,10 +20,16 @@ class Adblib:
         # バイト列を文字列に変換
         results = str(results, 'utf-8')
         # 文字列を分割
-        devices = results.splitlines()
-        if len(devices) <= 2:
+        self.devices = results.splitlines()
+        if len(self.devices) <= 2:
             return
-        self.device = devices[1].split()[0]
+        # 先頭行を削除（不要なメッセージのため）
+        self.devices.pop(0)
+        # とりあえず先頭のデバイスを設定（後で変更もできる）
+        self.setdevice(self.devices[0])
+    
+    def setdevice(self, _devise):
+        self.device = _devise.split()[0]
         print(self.device)
 
     def inputtext(self, _message):
