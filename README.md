@@ -101,9 +101,11 @@ if result:
 ```
 
 ### chkImg
-[`screencap`](#screencap) で取得したスクリーンショットに、テンプレート画像があればタップします。タップ結果を返してくれます。
+[`screencap`](#screencap) で取得したスクリーンショットに対して、テンプレート画像の有無を返してくれます。
 ```python
-aapo.touchImg('./template/stage_clear.png')
+if aapo.touchImg('./template/stage_clear.png'):
+    # あった時の処理
+    pass
 ```
 
 ### touchPos
