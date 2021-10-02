@@ -103,7 +103,7 @@ if result:
 ### chkImg
 [`screencap`](#screencap) で取得したスクリーンショットに対して、テンプレート画像の有無を返してくれます。
 ```python
-if aapo.touchImg('./template/stage_clear.png'):
+if aapo.chkImg('./template/stage_clear.png'):
     # あった時の処理
     pass
 ```
