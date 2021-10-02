@@ -100,12 +100,10 @@ if result:
     aapo.longTouchPos(x+50, y+50, 5000)
 ```
 
-### chkImg
-[`screencap`](#screencap) で取得したスクリーンショットに対して、テンプレート画像の有無を返してくれます。
+### touchImg
+[`screencap`](#screencap) で取得したスクリーンショットに、テンプレート画像があればタップします。タップ結果を返してくれます。
 ```python
-if aapo.chkImg('./template/stage_clear.png'):
-    # あった時の処理
-    pass
+aapo.touchImg('./template/stage_clear.png')
 ```
 
 ### touchPos
