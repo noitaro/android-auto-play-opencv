@@ -7,6 +7,10 @@ class Adblib:
     screenImg = []
     devices = []
 
+    # コンストラクタ（引数なし）
+    def __init__(self):
+        pass
+
     # コンストラクタ
     def __init__(self, _adbpath):
         self.adbpath = _adbpath

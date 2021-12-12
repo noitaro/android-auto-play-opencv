@@ -7,15 +7,16 @@ class AapoManager:
 
     adbl = None
     mtl = None
-    screencap = []
 
     # コンストラクタ
-    def __init__(self, _adbpath):
-        self.adbl = adb.Adblib(_adbpath)
-        if self.adbl.device == '' or self.adbl.device == '*':
-            print('アンドロイド端末が接続されていません。')
-            exit()
-        
+    def __init__(self, _adbpath=None):
+
+        if _adbpath is not None:
+            self.adbl = adb.Adblib(_adbpath)
+            if self.adbl.device == '' or self.adbl.device == '*':
+                print('アンドロイド端末が接続されていません。')
+                exit()
+            
         # インスタンス生成
         self.mtl = mt.MatchTemplateLib()
 
@@ -30,13 +31,20 @@ class AapoManager:
         sleep(_secs)
 
     def screencap(self):
+        """
+        Android の画面をキャプチャします。
+        """
         # 画面キャプチャ
         print('画面キャプチャ')
         self.adbl.screencap()
 
-    def chkImg(self, _temp):
+    def chkImg(self, _temp, _threshold=None):
+        """
+        テンプレート画像があるか確認します。タップはしません。
+        """
+
         # 曖昧画像検索
-        self.mtl.matchTemplate2(self.adbl.screenImg , _temp)
+        self.mtl.matchTemplate(self.adbl.screenImg , _temp, _threshold=_threshold)
         
         # 類似度閾値超え判定
         result = self.mtl.judgeMatching()
@@ -46,21 +54,48 @@ class AapoManager:
         else:
             return False
 
-    def chkImg2(self, _temp):
-        # 曖昧画像検索
-        self.mtl.matchTemplate2(self.adbl.screenImg , _temp)
+    def chkImg2(self, _temp, _screenshot=None, _multi=False, _threshold=None):
+        """
+        テンプレート画像があるか確認します。タップはしません。見つけた座標も返してくれます。
+        引数1: テンプレート画像
+        引数2: スクリーンショット画像（任意）
+        """
+
+        if _screenshot is None:
+            # 曖昧画像検索
+            self.mtl.matchTemplate(self.adbl.screenImg , _temp, _threshold=_threshold)
+        else:
+            self.mtl.matchTemplate(None , _temp, _screenshot, _threshold=_threshold)
         
         # 類似度閾値超え判定
         result = self.mtl.judgeMatching()
-        if result:
-            # 中央位置取得
-            cPos = self.mtl.getCenterPos()
-            print('画像発見, img=' + _temp + ', x=' + str(cPos[0]) + ', y=' + str(cPos[1]))
-            return (True, cPos[0], cPos[1])
+
+
+        if _multi:
+            if result:
+            
+                # 複数の中央位置取得
+                cPos = self.mtl.getCenterPosMulti()
+                print(f'画像発見 {len(cPos)}件')
+                return (True, cPos)
+        
+            else:
+                return (False, None)
+
         else:
-            return (False, 0, 0)
+            if result:
+                # 中央位置取得
+                cPos = self.mtl.getCenterPos()
+                print('画像発見, img=' + _temp + ', x=' + str(cPos[0]) + ', y=' + str(cPos[1]))
+                return (True, cPos[0], cPos[1])
+            else:
+                return (False, 0, 0)
+
 
     def touchImg(self, _temp):
+        """
+        テンプレート画像があればタップします。タップ結果も返してくれます。
+        """
         result = self.chkImg(_temp)
         if result == False:
             return False
@@ -94,7 +129,7 @@ class AapoManager:
         self.adbl.inputkeyevent(_keyevent)
 
     def imgSave(self, fileName):
-        print(' キャプチャ画像保存')
+        print('キャプチャ画像保存')
 
         # 保存先のフォルダを取得
         dirname = os.path.dirname(fileName)
