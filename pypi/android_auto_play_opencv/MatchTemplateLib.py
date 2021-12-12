@@ -28,6 +28,9 @@ class MatchTemplateLib():
             self.img = cv2.imdecode(numpy.frombuffer(_img, numpy.uint8), 0)
 
         self.temp = cv2.imread(_temp, 0)
+        if self.temp is None:
+            raise Exception(f'テンプレート画像が読み込めませんでした。\nパスが正しいかファイルが存在するか確認して下さい。\n{_temp}')
+            
         # テンプレートマッチング
         match_result = cv2.matchTemplate(self.img, self.temp, cv2.TM_CCOEFF_NORMED)
 
