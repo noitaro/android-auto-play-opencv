@@ -115,7 +115,7 @@ aapo.touchPos(750, 400)
 第3引数を指定すると、ロングタップします。
 ```python
 # X=750、Y=400 の位置を5秒間タップする.
-aapo.touchPos(750, 400, 5000)
+aapo.longTouchPos(750, 400, 5000)
 ```
 
 ### swipeTouchPos
