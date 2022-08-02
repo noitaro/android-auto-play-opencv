@@ -9,11 +9,12 @@ NoxPlayer を操作することも出来ます。
 https://noitalog.tokyo/android-auto-play-opencv/
 
 ## Installation
-このライブラリを使うには、[Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools "SDK Platform Tools release notes  |  Android Developers") に含まれる ```adb.exe``` が必要です。
++ ライブラリのインストール
 ```
 pip install android-auto-play-opencv
 ```
-OpenCV も同時にインストールされます。
+
++ このライブラリを使うには、[Android SDK Platform-Tools](https://developer.android.com/studio/releases/platform-tools "SDK Platform Tools release notes  |  Android Developers") に含まれる ```adb.exe``` が必要です。
 
 ## How to use
 ```python
