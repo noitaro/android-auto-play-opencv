@@ -9,7 +9,7 @@ class AapoManager:
     mtl = None
 
     # コンストラクタ
-    def __init__(self, _adbpath=None):
+    def __init__(self, _adbpath: str | None = None):
 
         if _adbpath is not None:
             self.adbl = adb.Adblib(_adbpath)
@@ -38,7 +38,7 @@ class AapoManager:
         print('画面キャプチャ')
         self.adbl.screencap()
 
-    def chkImg(self, _temp, _threshold=None):
+    def chkImg(self, _temp, _threshold: float | None = None):
         """
         テンプレート画像があるか確認します。タップはしません。
         """
@@ -47,18 +47,19 @@ class AapoManager:
         self.mtl.matchTemplate(self.adbl.screenImg , _temp, _threshold=_threshold)
         
         # 類似度閾値超え判定
-        result = self.mtl.judgeMatching()
+        result = self.mtl.judgeMatching(_threshold=_threshold)
         if result:
             print('画像発見, img=' + _temp)
             return True
         else:
             return False
 
-    def chkImg2(self, _temp, _screenshot=None, _multi=False, _threshold=None):
+    def chkImg2(self, _temp, _screenshot: str | None = None, _multi: bool = False, _threshold: float | None = None):
         """
         テンプレート画像があるか確認します。タップはしません。見つけた座標も返してくれます。
         引数1: テンプレート画像
         引数2: スクリーンショット画像（任意）
+        引数3: 複数の見つけた座標を返すか（任意）
         """
 
         if _screenshot is None:
@@ -68,7 +69,7 @@ class AapoManager:
             self.mtl.matchTemplate(None , _temp, _screenshot, _threshold=_threshold)
         
         # 類似度閾値超え判定
-        result = self.mtl.judgeMatching()
+        result = self.mtl.judgeMatching(_threshold=_threshold)
 
 
         if _multi:

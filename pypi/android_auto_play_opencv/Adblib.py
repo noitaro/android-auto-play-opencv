@@ -2,8 +2,8 @@ import subprocess
 
 class Adblib:
     
-    adbpath = ''
-    device = ''
+    adbpath: str = ''
+    device: str = ''
     screenImg = []
     devices = []
 
@@ -12,7 +12,7 @@ class Adblib:
         pass
 
     # コンストラクタ
-    def __init__(self, _adbpath):
+    def __init__(self, _adbpath: str):
         self.adbpath = _adbpath
 
         try:
