@@ -9,7 +9,15 @@ class AapoManager:
     mtl = None
 
     # コンストラクタ
-    def __init__(self, _adbpath: str | None = None):
+    def __init__(self, _adbpath = None):
+        """
+        Constructor
+
+        Parameters:
+        ----------
+        _adbpath : str | None
+            Directory path where adb.exe is located
+        """
 
         if _adbpath is not None:
             self.adbl = adb.Adblib(_adbpath)
@@ -38,9 +46,16 @@ class AapoManager:
         print('画面キャプチャ')
         self.adbl.screencap()
 
-    def chkImg(self, _temp, _threshold: float | None = None):
+    def chkImg(self, _temp, _threshold = None):
         """
         テンプレート画像があるか確認します。タップはしません。
+
+        Parameters:
+        ----------
+        _temp : str
+            Template image path
+        _threshold : float | None
+            Threshold for whether template images are included
         """
 
         # 曖昧画像検索
@@ -54,12 +69,20 @@ class AapoManager:
         else:
             return False
 
-    def chkImg2(self, _temp, _screenshot: str | None = None, _multi: bool = False, _threshold: float | None = None):
+    def chkImg2(self, _temp, _screenshot = None, _multi = False, _threshold = None):
         """
         テンプレート画像があるか確認します。タップはしません。見つけた座標も返してくれます。
-        引数1: テンプレート画像
-        引数2: スクリーンショット画像（任意）
-        引数3: 複数の見つけた座標を返すか（任意）
+        
+        Parameters:
+        ----------
+        _temp : str
+            Template image path
+        _screenshot : str | None
+            Base image path
+        _multi : bool
+            Whether to return multiple results
+        _threshold : float | None
+            Threshold for whether template images are included
         """
 
         if _screenshot is None:
@@ -70,7 +93,6 @@ class AapoManager:
         
         # 類似度閾値超え判定
         result = self.mtl.judgeMatching(_threshold=_threshold)
-
 
         if _multi:
             if result:

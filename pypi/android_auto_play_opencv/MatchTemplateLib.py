@@ -1,11 +1,10 @@
 import cv2 # pip install opencv-python
-from cv2 import Mat
 import numpy
 
 class MatchTemplateLib():
     
-    img: Mat | None = None
-    temp: Mat | None = None
+    img = None
+    temp = None
     loc = []
     minVal = 0
     maxVal = 0
@@ -15,7 +14,21 @@ class MatchTemplateLib():
     #類似度の設定(0~1)
     THRESHOLD = 0.8
     
-    def matchTemplate(self, _img, _temp, _screenshot: str | None = None, _threshold: float | None = None):
+    def matchTemplate(self, _img, _temp, _screenshot = None, _threshold = None):
+        """
+        テンプレートマッチング
+        
+        Parameters:
+        ----------
+        _img : Bytes
+            Image byte array
+        _temp : str
+            Template image path
+        _screenshot : str | None
+            Base image path
+        _threshold : float | None
+            Threshold for whether template images are included
+        """
 
         if _threshold is None:
             _threshold = self.THRESHOLD
@@ -41,7 +54,15 @@ class MatchTemplateLib():
         # 最も類似度が高い位置と低い位置を取得します
         self.minVal, self.maxVal, self.minLoc, self.maxLoc = cv2.minMaxLoc(match_result)
 
-    def judgeMatching(self, _threshold: float | None = None):
+    def judgeMatching(self, _threshold = None):
+        """
+        テンプレートマッチング結果に閾値を超えてる箇所があるか
+        
+        Parameters:
+        ----------
+        _threshold : float | None
+            Threshold for whether template images are included
+        """
         
         if _threshold is None:
             _threshold = self.THRESHOLD
