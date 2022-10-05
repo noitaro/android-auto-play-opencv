@@ -100,7 +100,16 @@ if result:
     # 見つかった位置から指定ピクセルズラしてロングタップ(5秒)
     aapo.longTouchPos(x+50, y+50, 5000)
 ```
-
+引数_multiをTrueにすると、複数の結果を返してくれます。
+```Python
+ret, poss = aapo.chkImg2('tenpure.png',_multi = True)
+if ret:
+    for i in range(len(poss)):
+        pos = poss[i]
+        print(f'X={pos[0]}, Y={pos[1]}')
+        pass
+    pass
+```
 ### touchImg
 [`screencap`](#screencap) で取得したスクリーンショットに、テンプレート画像があればタップします。タップ結果を返してくれます。
 ```python
