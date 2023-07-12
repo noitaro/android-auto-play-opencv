@@ -6,7 +6,7 @@ Android を操作する時に [Android Debug Bridge (adb)](https://developer.and
 NoxPlayer を操作することも出来ます。
 
 ## Readme
-https://noitalog.tokyo/android-auto-play-opencv/
+https://noitaro.github.io/android-auto-play-opencv/
 
 ## Installation
 + ライブラリのインストール
