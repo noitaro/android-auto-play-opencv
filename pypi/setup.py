@@ -12,7 +12,7 @@ setup(
     name='android_auto_play_opencv',  # パッケージ名(プロジェクト名)
     packages=['android_auto_play_opencv'],  # パッケージ内(プロジェクト内)のパッケージ名をリスト形式で指定
 
-    version='1.0.8',  # バージョン
+    version='1.0.9',  # バージョン
 
     license='MIT',  # ライセンス
 
@@ -38,7 +38,7 @@ setup(
 )
 
 # python -m venv env1
-# pip install wheel twine
+# pip install wheel twine setuptools
 # python setup.py bdist_wheel
 # twine upload --repository pypi dist/*
 # https://pypi.org/project/android-auto-play-opencv/
