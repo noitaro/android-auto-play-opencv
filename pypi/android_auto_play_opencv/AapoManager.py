@@ -2,6 +2,9 @@ import android_auto_play_opencv.Adblib as adb
 import android_auto_play_opencv.MatchTemplateLib as mt
 from time import sleep
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 class AapoManager:
 
@@ -22,7 +25,7 @@ class AapoManager:
         if _adbpath is not None:
             self.adbl = adb.Adblib(_adbpath)
             if self.adbl.device == '' or self.adbl.device == '*':
-                print('アンドロイド端末が接続されていません。')
+                logger.error('アンドロイド端末が接続されていません。')
                 exit()
             
         # インスタンス生成
@@ -33,7 +36,7 @@ class AapoManager:
 
     def end(self, _package):
         self.adbl.end(_package)
-        print('アプリを終了しました。')
+        logger.info('アプリを終了しました。')
 
     def sleep(self, _secs):
         sleep(_secs)
@@ -43,7 +46,7 @@ class AapoManager:
         Android の画面をキャプチャします。
         """
         # 画面キャプチャ
-        print('画面キャプチャ')
+        logger.debug('画面キャプチャ')
         self.adbl.screencap()
 
     def chkImg(self, _temp, _threshold = None):
@@ -64,7 +67,7 @@ class AapoManager:
         # 類似度閾値超え判定
         result = self.mtl.judgeMatching(_threshold=_threshold)
         if result:
-            print('画像発見, img=' + _temp)
+            logger.info('画像発見, img=' + _temp)
             return True
         else:
             return False
@@ -99,7 +102,7 @@ class AapoManager:
             
                 # 複数の中央位置取得
                 cPos = self.mtl.getCenterPosMulti()
-                print(f'画像発見 {len(cPos)}件')
+                logger.info(f'画像発見 {len(cPos)}件')
                 return (True, cPos)
         
             else:
@@ -109,7 +112,7 @@ class AapoManager:
             if result:
                 # 中央位置取得
                 cPos = self.mtl.getCenterPos()
-                print('画像発見, img=' + _temp + ', x=' + str(cPos[0]) + ', y=' + str(cPos[1]))
+                logger.info('画像発見, img=' + _temp + ', x=' + str(cPos[0]) + ', y=' + str(cPos[1]))
                 return (True, cPos[0], cPos[1])
             else:
                 return (False, 0, 0)
@@ -130,20 +133,20 @@ class AapoManager:
         else:
             # タッチ
             self.adbl.touch(cPos[0], cPos[1])
-            print('タッチ: x=' + str(cPos[0]) + ', y=' + str(cPos[1]) + ', img=' + _temp)
+            logger.debug('タッチ: x=' + str(cPos[0]) + ', y=' + str(cPos[1]) + ', img=' + _temp)
             return True
 
     def touchPos(self, _x, _y):
         self.adbl.touch(_x, _y)
-        print('タッチ: x=' + str(_x) + ', y=' + str(_y))
+        logger.debug('タッチ: x=' + str(_x) + ', y=' + str(_y))
 
     def longTouchPos(self, _x, _y, _msec):
         self.adbl.longTouch(_x, _y, _msec)
-        print('ロングタッチ: x=' + str(_x) + ', y=' + str(_y))
+        logger.debug('ロングタッチ: x=' + str(_x) + ', y=' + str(_y))
 
     def swipeTouchPos(self, _x1, _y1, _x2, _y2, _msec):
         self.adbl.swipeTouch(_x1, _y1, _x2, _y2, _msec)
-        print('スワイプ: x1=' + str(_x1) + ', y1=' + str(_y1) + ', x2=' + str(_x2) + ', y2=' + str(_y2))
+        logger.debug('スワイプ: x1=' + str(_x1) + ', y1=' + str(_y1) + ', x2=' + str(_x2) + ', y2=' + str(_y2))
 
     def inputtext(self, _message):
         self.adbl.inputtext(_message)
@@ -152,7 +155,7 @@ class AapoManager:
         self.adbl.inputkeyevent(_keyevent)
 
     def imgSave(self, fileName):
-        print('キャプチャ画像保存')
+        logger.debug('キャプチャ画像保存')
 
         # 保存先のフォルダを取得
         dirname = os.path.dirname(fileName)

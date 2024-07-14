@@ -1,4 +1,7 @@
 import subprocess
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Adblib:
     
@@ -18,7 +21,7 @@ class Adblib:
         try:
             results = subprocess.check_output([self.adbpath + 'adb', 'devices'])
         except FileNotFoundError:
-            print('adb.exe が見つかりません。（' + self.adbpath + 'adb.exe' + '）')
+            logger.error('adb.exe が見つかりません。（' + self.adbpath + 'adb.exe' + '）')
             exit()
 
         # バイト列を文字列に変換
@@ -34,7 +37,7 @@ class Adblib:
     
     def setdevice(self, _devise):
         self.device = _devise.split()[0]
-        print(self.device)
+        logger.info(self.device)
 
     def inputtext(self, _message):
         subprocess.call([self.adbpath + 'adb', '-s', self.device, 'shell', 'input', 'text', _message])
